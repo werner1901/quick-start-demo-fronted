@@ -154,7 +154,7 @@ export default {
     let date = row[column.property];
     console.log(moment(date).format("YYYY-MM-DD"));
     // debugger;
-    return moment(date).format("YYYY-MM-DD");
+    return moment(date).utcOffset(480).format("YYYY-MM-DD");
   },
     /**
      * 页记录数改变
@@ -325,11 +325,11 @@ export default {
   /**
    * 格式化时间
    */
-  dateFormat(row, column) {
-    let date = row[column.property];
-    // console.log(moment(date).format("YYYY-MM-DD"));
-    // debugger;
-    return moment(date).format("YYYY-MM-DD");
-  },
+  // dateFormat(row, column) {
+  //   let date = row[column.property];
+  //   // console.log(moment(date).format("YYYY-MM-DD"));
+  //   // debugger;
+  //   return moment(date).utcOffset(480).format("YYYY-MM-DD");
+  // },
 };
 </script>

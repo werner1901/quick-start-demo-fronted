@@ -92,7 +92,7 @@ export default {
      */
     handleOkEvent(form) {
       // 校验没通过不允许提交
-      debugger;
+      // debugger;
       if (
         this.$refs[form].validate((valid) => {
           if (valid) {
@@ -128,7 +128,7 @@ export default {
         throw new Error("传递参数异常");
       }
       // 从后端加载数据现在在界面上 主要包含id和version
-      debugger;
+      // debugger;
       this.findUserById(id);
       this.$refs.userForm.resetFields();
     },
