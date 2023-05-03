@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     refreshPage(){
-      this.$emit('handleUserSearch');;
+      this.$emit('handleUserSearch');
     },
     /**********************************************/
     //        以下开始界面处理方法
@@ -161,13 +161,21 @@ export default {
       /**
        * 调用api接口更新
        */
-      add({...userDTO,created_by:1,updated_by:0})
+      add({...userDTO,createdBy:0,updatedBy:1})
         .then((commonResposne) => {
-          this.$message.success(commonResposne.head.$message);
+          // this.$message.success(commonResposne.head.$message);
           if (commonResposne.head.code === "0") {
+            this.$message({
+              message: '添加成功',
+              type: 'success'
+            });
             this.isVisible = false;
+            this.refreshPage();
           } else {
-            this.$message.warning(commonResposne.head.$message);
+            this.$message({
+              message: commonResposne.head.message,
+              type: 'warning'
+            });
             this.isVisible = true;
           }
           // 调用父组件方法刷新纪录
@@ -184,7 +192,7 @@ export default {
       /**
        * 调用api接口更新
        */
-      update({...userDTO,created_by:0})
+      update({...userDTO,createdBy:0})
         .then((commonResposne) => {
           if (commonResposne.head.code === "0") {
             // this.$message.success(commonResposne.head.$message);

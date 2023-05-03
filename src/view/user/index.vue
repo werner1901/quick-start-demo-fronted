@@ -102,7 +102,7 @@
 
 <script>
 import moment from "moment";
-import { search, remove, batchRemove } from "@/api/user";
+import { search, batchRemove } from "@/api/user";
 import UserDialog from "./user-dialog";
 
 export default {
