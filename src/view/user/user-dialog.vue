@@ -61,8 +61,10 @@ export default {
         citizenId: [
           { required: true, message: "输入身份证id", trigger: "blur" },
           {
-            len:18, message:"请输入正确身份证", trigger:"blur"
-          }
+            len: 18,
+            message: "请输入正确身份证",
+            trigger: "blur",
+          },
         ],
       },
     };
@@ -80,8 +82,8 @@ export default {
     this.initUi();
   },
   methods: {
-    refreshPage(){
-      this.$emit('handleUserSearch');
+    refreshPage() {
+      this.$emit("handleUserSearch");
     },
     /**********************************************/
     //        以下开始界面处理方法
@@ -96,7 +98,6 @@ export default {
       if (
         this.$refs[form].validate((valid) => {
           if (valid) {
-            // 如果是增加这提交界面元素，其他后台补充， 修改者则依据界面更新否则
             if (this.dialogType === "ADD") {
               this.insertUser(this.userDTO);
             } else if (this.dialogType === "EDIT") {
@@ -147,12 +148,6 @@ export default {
     initUi() {
       this.userDTO = {};
     },
-    /**
-     * 隐藏
-     */
-    // onHide() {
-    //   this.isVisible = false;
-    // },
 
     /**
      * 处于添加模式下的更新
@@ -161,20 +156,20 @@ export default {
       /**
        * 调用api接口更新
        */
-      add({...userDTO,createdBy:0,updatedBy:1})
+      add({ ...userDTO, createdBy: 0, updatedBy: 1 })
         .then((commonResposne) => {
           // this.$message.success(commonResposne.head.$message);
           if (commonResposne.head.code === "0") {
             this.$message({
-              message: '添加成功',
-              type: 'success'
+              message: "添加成功",
+              type: "success",
             });
             this.isVisible = false;
             this.refreshPage();
           } else {
             this.$message({
               message: commonResposne.head.message,
-              type: 'warning'
+              type: "warning",
             });
             this.isVisible = true;
           }
@@ -192,22 +187,22 @@ export default {
       /**
        * 调用api接口更新
        */
-      update({...userDTO,createdBy:0})
+      update({ ...userDTO, createdBy: 0 })
         .then((commonResposne) => {
           if (commonResposne.head.code === "0") {
             // this.$message.success(commonResposne.head.$message);
             this.$message({
-              message: '编辑成功',
-              type: 'success'
+              message: "编辑成功",
+              type: "success",
             });
             this.isVisible = false;
             this.refreshPage();
           } else {
             this.$message({
               message: commonResposne.head.message,
-              type: 'warning'
+              type: "warning",
             });
-            this.isVisible = true
+            this.isVisible = true;
             // this.$message.warning(commonResposne.head.$message);
           }
           // 调用父组件方法刷新纪录

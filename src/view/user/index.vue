@@ -82,8 +82,16 @@
       >
       </el-pagination>
 
-      <UserDialog ref="AddUserDialog" dialogType="ADD" @handleUserSearch="handleUserSearch"/>
-      <UserDialog ref="EditUserDialog" dialogType="EDIT" @handleUserSearch="handleUserSearch"/>
+      <UserDialog
+        ref="AddUserDialog"
+        dialogType="ADD"
+        @handleUserSearch="handleUserSearch"
+      />
+      <UserDialog
+        ref="EditUserDialog"
+        dialogType="EDIT"
+        @handleUserSearch="handleUserSearch"
+      />
     </el-main>
 
     <el-footer> 这里是网站的页脚 </el-footer>
@@ -120,10 +128,6 @@ export default {
        */
       userQuery: {},
       /**
-       * 接收后端的请求接口返回的用户信息
-       */
-      userVO: {},
-      /**
        *  增删改接口向后端传送需要的对象，后端某一些接口也返回该类型的对象
        */
       userDTO: {},
@@ -132,8 +136,7 @@ export default {
        */
       pagination: { pageSize: 0, pageIndex: 0, total: 0 },
 
-      dialogVisible: false,
-      nothing:'暂无数据'
+      nothing: "暂无数据",
     };
   },
   /**
@@ -146,16 +149,15 @@ export default {
    * 做一些和界面相关的初始化的工作
    */
   mounted() {
-    this.handleUserSearch()
+    this.handleUserSearch();
   },
   methods: {
-
     dateFormat(row, column) {
-    let date = row[column.property];
-    console.log(moment(date).format("YYYY-MM-DD"));
-    // debugger;
-    return moment(date).utcOffset(480).format("YYYY-MM-DD");
-  },
+      let date = row[column.property];
+      console.log(moment(date).format("YYYY-MM-DD"));
+      // debugger;
+      return moment(date).utcOffset(480).format("YYYY-MM-DD");
+    },
     /**
      * 页记录数改变
      */
@@ -200,7 +202,6 @@ export default {
      */
     handleBatchDelete() {
       let selectedRows = this.$refs.userTable.selection;
-      console.log(selectedRows);
       if (selectedRows == null || selectedRows.length === 0) {
         this.$message.error("至少选择一行数据进行操作");
         return;
@@ -214,14 +215,12 @@ export default {
               version: selectedRows[i].version,
             });
           }
-          console.log(idVersions);
-          // debugger;
           batchRemove(idVersions)
             .then((commonResponse) => {
               if (commonResponse.body == true) {
                 this.$message({
-                  message: '已删除',
-                  type: 'success'
+                  message: "已删除",
+                  type: "success",
                 });
               } else {
                 this.$message.error(commonResponse.head.message);
@@ -257,21 +256,18 @@ export default {
     handleRowDelete(row) {
       this.$confirm("确定删除?").then((result) => {
         if (result) {
-          console.log(row)
           // 根据id和版本匹配删除
-          batchRemove([{id:row.id, version:row.version}])
+          batchRemove([{ id: row.id, version: row.version }])
             .then((commonResponse) => {
               if (commonResponse.body) {
-                // this.$message.success('已删除')
-                // this.$message.success(commonResponse.head.$message);
                 this.$message({
-                  message: '已删除',
-                  type: 'success'
+                  message: "已删除",
+                  type: "success",
                 });
                 this.handleUserSearch();
               } else {
                 this.$message.error(
-                  "发生错误: " + commonResponse.head.$message
+                  "发生错误: " + commonResponse.head.message
                 );
               }
             })
