@@ -111,7 +111,7 @@
 <script>
 import moment from "moment";
 import { search, batchRemove } from "@/api/user";
-import UserDialog from "./user-dialog";
+import UserDialog from "../components/user-dialog.vue";
 
 export default {
   name: "UserManage",

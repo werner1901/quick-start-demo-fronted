@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import UserManage from './view/user/index.vue'
+import UserManage from './view/index.vue'
 
 export default {
   name: 'App',
